@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">simlabor</string>
+    <string name="menu_login">Login</string>
+    <string name="menu_register">Register</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login_form">LoginForm</string>
+    <string name="title_activity_register_form">RegisterForm</string>
 </resources>

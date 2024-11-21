@@ -51,6 +51,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.compose.material3:material3:1.0.0");
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,4 +67,17 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // navigation
+    implementation(libs.androidx.navigation.compose)
+
+    // extended icons
+    implementation(libs.androidx.material.icons.extended)
+
+    // coil image
+    implementation(libs.coil.compose)
+
+    implementation ("androidx.navigation:navigation-compose:2.5.0") // Sesuaikan dengan versi Anda
+    implementation ("androidx.compose.animation:animation:1.5.0") //
+
 }

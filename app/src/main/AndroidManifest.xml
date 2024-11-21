@@ -13,6 +13,16 @@
         android:theme="@style/Theme.Simlabor"
         tools:targetApi="31">
         <activity
+            android:name=".RegisterForm"
+            android:exported="false"
+            android:label="@string/title_activity_register_form"
+            android:theme="@style/Theme.Simlabor" />
+        <activity
+            android:name=".LoginForm"
+            android:exported="false"
+            android:label="@string/title_activity_login_form"
+            android:theme="@style/Theme.Simlabor" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
