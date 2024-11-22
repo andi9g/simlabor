@@ -83,11 +83,11 @@ fun LoginScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Logo
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             Image(
                 painter = painterResource(id = R.drawable.cube_logo),
                 contentDescription = "Logo",
-                modifier = Modifier.size(200.dp)
+                modifier = Modifier.size(250.dp)
             )
 
 
@@ -135,8 +135,8 @@ fun LoginScreen() {
             ) {
                 Text(
                     text = "Login",
-                    fontSize = 16.sp,
-                    modifier = Modifier.padding(vertical = 20.dp)
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(vertical = 13.dp)
                 )
 
             }
