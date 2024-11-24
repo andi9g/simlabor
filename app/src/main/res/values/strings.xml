@@ -5,4 +5,7 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_login_form">LoginForm</string>
     <string name="title_activity_register_form">RegisterForm</string>
+    <string name="title_activity_master">MasterActivity</string>
+    <string name="title_activity_show">ShowActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>

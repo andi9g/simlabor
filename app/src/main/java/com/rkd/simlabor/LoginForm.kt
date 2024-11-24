@@ -1,13 +1,8 @@
 package com.rkd.simlabor
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import android.content.Intent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,10 +14,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -38,8 +32,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.rkd.simlabor.ui.theme.SimlaborTheme
+import com.rkd.simlabor.master.MainActivity
 
 @Composable
 fun LoginForm(
@@ -61,16 +54,16 @@ fun Greeting2(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview2() {
-    SimlaborTheme {
-        Greeting2("Android")
-    }
+    LoginScreen()
 }
 
 
 @Composable
 fun LoginScreen() {
-    var username by remember { mutableStateOf("admin") }
+    var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -89,8 +82,6 @@ fun LoginScreen() {
                 contentDescription = "Logo",
                 modifier = Modifier.size(250.dp)
             )
-
-
 
             OutlinedTextField(
                 value = username,
@@ -125,12 +116,15 @@ fun LoginScreen() {
 
             // Tombol Login
             Button(
-                onClick = { /* Handle login */ },
+                onClick = {
+                   val intent = Intent(context, MainActivity::class.java)
+                    context.startActivity(intent)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Green
+                    containerColor = colorResource(id = R.color.purple_700)
                 ),
             ) {
                 Text(
@@ -145,3 +139,4 @@ fun LoginScreen() {
 
     }
 }
+
