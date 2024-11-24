@@ -20,7 +20,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Dns
+import androidx.compose.material.icons.filled.Update
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -141,7 +147,7 @@ fun HomeActivityShow(text: String) {
                         },
                         text1 = "Data Peminjaman",
                         text2 = "Total : 2",
-                        imageResource = R.drawable.cube_logo// Gambar latar belakang
+                        imageVector = Icons.Default.DateRange
                     )
 
                     Spacer(modifier = Modifier.height(25.dp))
@@ -152,7 +158,7 @@ fun HomeActivityShow(text: String) {
                         },
                         text1 = "Data Pengembalian",
                         text2 = "Total : 0",
-                        imageResource = R.drawable.ic_launcher_foreground // Gambar latar belakang
+                        imageVector = Icons.Default.Update
                     )
 
                 }
@@ -172,7 +178,7 @@ fun HomeActivityShow(text: String) {
 }
 
 @Composable
-fun BackgroundImageButton(onClick: () -> Unit, text1: String, text2: String, imageResource: Int) {
+fun BackgroundImageButton(onClick: () -> Unit, text1: String, text2: String, imageVector: ImageVector) {
     Box(
         modifier = Modifier
             .fillMaxWidth() // Memastikan button mengisi lebar penuh
@@ -187,12 +193,12 @@ fun BackgroundImageButton(onClick: () -> Unit, text1: String, text2: String, ima
             modifier = Modifier.padding(15.dp),
             verticalAlignment = Alignment.CenterVertically,
         ){
-            Image(
-                painter = painterResource(id = imageResource),
-                contentDescription = "gambar",
-//                contentScale = ContentScale.Crop, // Memastikan gambar memenuhi Box
+
+            Icon(imageVector = imageVector,
+                contentDescription = "Icon",
                 modifier = Modifier
                     .size(80.dp),
+                tint = colorResource(id = R.color.lightgreenActive2)
             )
 
 
