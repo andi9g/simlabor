@@ -1,5 +1,6 @@
 package com.rkd.simlabor.topbar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -26,12 +27,14 @@ import com.rkd.simlabor.R
 @Composable
 fun TopBar(title: String, onNotificationClick: () -> Unit) {
     TopAppBar(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(colorResource(id = R.color.purple_500))
             .clip(
                 RoundedCornerShape(
-                bottomEnd = 20.dp,
-                bottomStart = 20.dp
-            )
+                    bottomEnd = 20.dp,
+                    bottomStart = 20.dp
+                )
             ),
         title = {
             Text(

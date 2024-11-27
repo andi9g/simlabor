@@ -8,22 +8,3 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun LoginSimlabor(
-    modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
-    context: Context? = null
-) {
-    LoginForm()
-}
-
-
-
-
-@Preview(showBackground = true)
-@Composable
-private fun SimlaborLoginRegisterPrev() {
-    val navController = rememberNavController() // Dummy NavController untuk preview
-    LoginSimlabor()
-}

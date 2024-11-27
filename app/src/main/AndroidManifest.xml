@@ -15,22 +15,17 @@
         android:theme="@style/Theme.Simlabor"
         tools:targetApi="31">
         <activity
-            android:name=".master.HomeActivity"
-            android:exported="false"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme.Simlabor" />
-        <activity
-            android:name=".RegisterForm"
-            android:exported="false"
-            android:label="@string/title_activity_register_form"
-            android:theme="@style/Theme.Simlabor" />
-        <activity
             android:name=".master.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.Simlabor" />
         <activity
             android:name=".LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Simlabor" />
+        <activity
+            android:name=".SplashScreen"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Simlabor">

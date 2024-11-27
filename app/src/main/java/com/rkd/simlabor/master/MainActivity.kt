@@ -52,14 +52,7 @@ class MainActivity : ComponentActivity() {
                     },
                     bottomBar = { BottomNavigationBar(navController) }
                 ) { innerPadding ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(colorResource(id = R.color.purple_500)),
-
-                        ) {
-                        NavigationHost(navController, Modifier.padding(innerPadding))
-                    }
+                    NavigationHost(navController, Modifier.padding(innerPadding))
                 }
             }
         }
@@ -90,13 +83,6 @@ private fun tampil() {
         },
         bottomBar = { BottomNavigationBar(navController) }
     ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(colorResource(id = R.color.purple_500)),
-
-            ) {
             NavigationHost(navController, Modifier.padding(innerPadding))
-        }
     }
 }

@@ -51,7 +51,9 @@ import com.rkd.simlabor.R
 fun HomeActivityShow(text: String) {
     val context = LocalContext.current
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize()
+        .background(colorResource(id = R.color.purple_500))
+    ) {
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -172,6 +174,9 @@ fun HomeActivityShow(text: String) {
 
 
         }
+
+
+
     }
 
 
