@@ -1,5 +1,6 @@
 package com.rkd.simlabor.master
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -18,18 +19,32 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
+import com.rkd.simlabor.LoginActivity
 import com.rkd.simlabor.master.ui.theme.SimlaborTheme
 import com.rkd.simlabor.navigation.BottomNavigationBar
 import com.rkd.simlabor.topbar.TopBar
 import com.rkd.simlabor.R
+import com.rkd.simlabor.data.DataStoreManager
 import com.rkd.simlabor.navigation.NavigationHost
+import com.rkd.simlabor.network.ApiClient
+import com.rkd.simlabor.sp.SharedPreferencesHelper
+import com.rkd.simlabor.toast.showCustomToast
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    private lateinit var dataStoreManager: DataStoreManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sp = SharedPreferencesHelper(applicationContext)
+        sp.getData("message")?.let {
+            Toast.makeText(this, "Selamat Datang", Toast.LENGTH_LONG).show()
+        }
         enableEdgeToEdge()
+//        validateTokenAndNavigate()
         setContent {
             SimlaborTheme {
                 val navController = rememberNavController()
@@ -57,7 +72,17 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+
+
+
     }
+
+
+
+
+
+
+
 }
 
 @Preview(showBackground = true)

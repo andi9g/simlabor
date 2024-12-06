@@ -68,6 +68,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+//    implementation ("androidx.compose.ui:ui:1.5.2")
+//    implementation ("androidx.compose.foundation:foundation:1.5.2")
+//    implementation ("androidx.activity:activity-compose:1.7.2")
     // navigation
     implementation(libs.androidx.navigation.compose)
 
@@ -75,7 +78,8 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
 
     // coil image
-    implementation(libs.coil.compose)
+//    implementation(libs.coil.compose)
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")

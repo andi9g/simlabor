@@ -1,5 +1,6 @@
 package com.rkd.simlabor.master.content
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -39,28 +40,32 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rkd.simlabor.R
-
+import com.rkd.simlabor.sp.SharedPreferencesHelper
 
 
 @Composable
-fun HomeActivityShow(text: String) {
+fun HomeActivityShow(text: String, context: Context) {
+    val sp = SharedPreferencesHelper(context.applicationContext)
     val context = LocalContext.current
 
-    Column(modifier = Modifier.fillMaxSize()
+    Column(modifier = Modifier
+        .fillMaxSize()
         .background(colorResource(id = R.color.purple_500))
     ) {
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center,
+            horizontalArrangement = Arrangement.Start,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
+                .padding(vertical = 20.dp)
         ) {
             Box(
                 modifier = Modifier
@@ -82,15 +87,16 @@ fun HomeActivityShow(text: String) {
             Spacer(modifier = Modifier.width(20.dp))
             Column {
                 Text(
-                    text = "ANDI RIZKY BAYU PUTRA",
+                    text = "${sp.getData("name")}".uppercase(),
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp,
                     color = colorResource(id = R.color.light),
                     style = MaterialTheme.typography.titleLarge
                 )
                 Row {
-                    Text(text = "Admin - ", color = MaterialTheme.colorScheme.primary)
-                    Text(text = "Guru", color = MaterialTheme.colorScheme.primary)
+                    Text(text = "${sp.getData("email")}",
+                        color = colorResource(id = R.color.lightgreen)
+                    )
                 }
             }
         }
@@ -242,5 +248,6 @@ fun BackgroundImageButton(onClick: () -> Unit, text1: String, text2: String, ima
 @Preview(showBackground = true)
 @Composable
 private fun lihat() {
-    HomeActivityShow(text = "Text")
+    val context = LocalContext.current
+    HomeActivityShow(text = "Text", context)
 }

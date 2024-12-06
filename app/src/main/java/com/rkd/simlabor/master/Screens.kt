@@ -1,34 +1,36 @@
 package com.rkd.simlabor.master
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.rkd.simlabor.master.content.HomeActivityShow
+import com.rkd.simlabor.master.content.InventarisScreenShow
 
 
 @Composable
-fun HomeScreen() {
-    HomeActivityShow(text = "Home Screen")
+fun HomeScreen(context: Context) {
+    HomeActivityShow(text = "Home", context)
 }
 
 @Composable
 fun InventarisScreen() {
-    HomeActivityShow(text = "Home Screen")
+    InventarisScreenShow(text = "DATA INVENTARIS")
 }
 
 @Composable
-fun ScanScreen() {
-    HomeActivityShow(text = "Home Screen")
+fun ScanScreen(context: Context) {
+    HomeActivityShow(text = "Home Screen", context)
 }
 
 @Composable
-fun HistoriScreen() {
-    HomeActivityShow(text = "Home Screen")
+fun HistoriScreen(context: Context) {
+    HomeActivityShow(text = "Home Screen", context)
 }
 
 
 @Composable
-fun ProfileScreen() {
-    HomeActivityShow(text = "Home Screen")
+fun ProfileScreen(context: Context) {
+    HomeActivityShow(text = "Home Screen", context)
 }
 
 @Preview(showBackground = true)
