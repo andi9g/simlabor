@@ -2,57 +2,67 @@ package com.rkd.simlabor.master.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.DashboardCustomize
-import androidx.compose.material.icons.filled.Dataset
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rkd.simlabor.R
+import com.rkd.simlabor.data.DataStoreManager
 import com.rkd.simlabor.master.content.item.ItemInvetaris
-import com.rkd.simlabor.model.DataInvetarisModel
+import com.rkd.simlabor.model.AsetViewModel
+import com.rkd.simlabor.model.AsetViewModelFactory
+import kotlinx.coroutines.launch
 
 
 //@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 private fun show() {
-    InventarisScreenShow(text = "DATA INVENTARIS")
+    InventarisScreenShow(
+        text = "DATA INVENTARIS"
+    )
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InventarisScreenShow(text: String) {
+    val context = LocalContext.current
+    val dataStoreManager = remember { DataStoreManager(context) }
+    val viewModel: AsetViewModel = viewModel(
+        factory = AsetViewModelFactory(dataStoreManager)
+    )
+
+    val asetList by viewModel.asetList
+    var currentPage by remember { mutableStateOf(1) }
+    var keyword by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
+
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -94,20 +104,25 @@ fun InventarisScreenShow(text: String) {
                 }
             }
 
-            var searchQuery by remember { (mutableStateOf("")) }
+//            var searchQuery by remember { (mutableStateOf("")) }
 
 
-            Box(modifier = Modifier.padding(horizontal = 20.dp)) {
-                SearchBar(
-                    query = searchQuery,
-                    onQueryChange = { newQuery ->
-                        searchQuery = newQuery
+
+
+            Box(modifier = Modifier.padding(horizontal = 18.dp)) {
+
+
+                // SearchBar untuk pencarian
+                SearchMasterActivity(
+                    query = keyword,
+                    onQueryChange = { keyword = it },
+                    onSearch = {
+                        coroutineScope.launch {
+                            viewModel.fetchData(keyword = keyword, page = currentPage)
+                        }
                     },
-                    modifier = Modifier
-                        .padding(
-                            bottom = 20.dp
-                        )
-
+                    modifier = Modifier.fillMaxWidth(),
+                    placeholder = "Search"
                 )
             }
 
@@ -132,31 +147,21 @@ fun InventarisScreenShow(text: String) {
 
                 ){
 
+                Column {
+                    Spacer(modifier = Modifier.height(10.dp))
 
-
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier
-                ) {
-                    item{
-                        for (i in 1..10) {
-                            ItemInvetaris(dataInvetarisModel = DataInvetarisModel(
-                                idbarang = 2,
-                                namabarang = "Komputer",
-                                stok = 12,
-                                tahun = "2024",
-                                gambar = "https://cdn-icons-png.flaticon.com/512/9187/9187604.png"
-                            ))
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(2.dp),
+                        modifier = Modifier
+                    ) {
+                        items(asetList) { aset ->
+                            ItemInvetaris(aset)
                         }
+
                     }
-
-
-
-
-
-
-
                 }
+
+
 
 
             }

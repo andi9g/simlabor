@@ -9,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -16,50 +17,45 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.rkd.simlabor.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(
+fun SearchMasterActivity(
     query: String,
     onQueryChange: (String) -> Unit,
-    modifier: Modifier = Modifier
+    onSearch: () -> Unit,
+    modifier: Modifier = Modifier,
+    placeholder: String = "Search..."
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
     TextField(
         value = query,
         onValueChange = onQueryChange,
-        placeholder = {
-            Text("Search...")
-        },
+        placeholder = { Text(placeholder) },
+        singleLine = true, // Membatasi input hanya satu baris
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search Icon"
             )
         },
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = colorResource(id = R.color.white), // Warna latar belakang
-            focusedIndicatorColor = colorResource(id = R.color.lightgreen), // Garis bawah merah saat fokus
-            unfocusedIndicatorColor = Color.Gray // Garis bawah
-        ),
-        singleLine = true,
         keyboardOptions = KeyboardOptions.Default.copy(
-            imeAction = ImeAction.Done // Mengatur aksi IME menjadi "Done"
+            imeAction = ImeAction.Search // Tombol 'Search' di keyboard
         ),
         keyboardActions = KeyboardActions(
-            onDone = {
-                // Aksi saat tombol "Done" ditekan
-                keyboardController?.hide() // Menutup keyboard
+            onSearch = {
+                onSearch() // Aksi pencarian saat tombol 'Search' ditekan
             }
+        ),
+        colors = TextFieldDefaults.textFieldColors(
+            focusedIndicatorColor = Color.Transparent, // Hilangkan garis bawah saat fokus
+            unfocusedIndicatorColor = Color.Transparent // Hilangkan garis bawah saat tidak fokus
         ),
         modifier = modifier
             .fillMaxWidth()
-            .padding(3.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .padding(bottom = 15.dp)
+            .padding(vertical = 5.dp)
+            .clip(RoundedCornerShape(12.dp))
     )
 }

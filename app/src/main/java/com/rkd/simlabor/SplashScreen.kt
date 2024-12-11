@@ -80,15 +80,8 @@ class SplashScreen: ComponentActivity() {
                     }
                     if (response.status == 1) {
 
-                        val response2 = ApiClient.apiService.getData("Bearer $token")
-                        if (response2.isSuccessful) {
-                            response2.body()?.message.let {
-                                sp.saveData("message", "${response2.body()?.message}")
-//                                sp.saveData("name", "${response.user.name}")
-                                navigateToHome()
-                            }
-
-                        }
+                        sp.saveData("message", "Welcome")
+                        navigateToHome()
                          // Token valid, pindah ke HomeActivity
                     } else {
                         dataStoreManager.clearToken() // Token tidak valid, hapus token
